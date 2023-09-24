@@ -1,0 +1,64 @@
+﻿#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Calculator {
+public:
+    // Оголошення публічних змінних класу
+    float x, y, z;
+    int factorial;
+
+    // Конструктор класу, приймає вхідні параметри і ініціалізує змінні класу
+    Calculator(float x, float y, float z, int factorial) {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->factorial = factorial;
+    }
+
+    // Метод для обчислення змінної a
+    double calculateA() {
+        // Обчислення факторіала
+        double result = tgamma(factorial + 1);
+
+        // Обчислення a 
+        double a = log(10) * pow(((fabs(pow(b(), 2)) - cbrt(fabs(pow(y, 2) - x) / (x + 2.1)) + (x - pow(y, 2)) / (b() + 2 * pow(z, 2)))), 2.0 / 3.0);
+        return a;
+    }
+
+    // Метод для обчислення змінної b
+    double calculateB() {
+        // Обчислення факторіала
+        double result = tgamma(factorial + 1);
+
+        // Обчислення b
+        double b = log(10) * pow(fabs(z), 1.0 / 3.0) + (pow(y, 2) + pow(cos(x), 2) * pow(fabs(x), 0.3)) / (3 + y + pow(x, 2) / result + pow(z, 3));
+        return b;
+    }
+
+private:
+    // Приватний метод, який викликає метод calculateB
+    double b() {
+        return calculateB();
+    }
+};
+
+int main() {
+    // Вхідні дані
+    float x = 0.48 * 14;
+    float y = 0.47 * 14;
+    float z = -1.32 * 14;
+    int factorial = 2;
+
+    // Створення об'єкта класу Calculator 
+    Calculator calc(x, y, z, factorial);
+
+    // Обчислення 'a' і 'b' за допомогою методів класу Calculator
+    double a = calc.calculateA();
+    double b = calc.calculateB();
+
+    cout << "a: " << a << endl;
+    cout << "b: " << b << endl;
+
+    return 0;
+}
