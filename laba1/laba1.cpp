@@ -8,7 +8,6 @@ public:
     float x, y, z;
     int factorial;
 
-    // Конструктор класу, приймає вхідні параметри і ініціалізує змінні класу
     Calculator(float x, float y, float z, int factorial) {
         this->x = x;
         this->y = y;
@@ -16,13 +15,12 @@ public:
         this->factorial = factorial;
     }
 
-
     double calculateA() {
         // Обчислення факторіала
         double result = tgamma(factorial + 1);
 
         // Обчислення a 
-        double a = log(10) * pow(((fabs(pow(b(), 2)) - cbrt(fabs(pow(y, 2) - x) / (x + 2.1)) + (x - pow(y, 2)) / (b() + 2 * pow(z, 2)))), 2.0 / 3.0);
+        double a = log(10) * pow(((fabs(pow(calculateB(), 2)) - cbrt(fabs(pow(y, 2) - x) / (x + 2.1)) + (x - pow(y, 2)) / (calculateB() + 2 * pow(z, 2)))), 2.0 / 3.0);
         return a;
     }
 
@@ -31,12 +29,6 @@ public:
         double result = tgamma(factorial + 1);
         double b = log(10) * pow(fabs(z), 1.0 / 3.0) + (pow(y, 2) + pow(cos(x), 2) * pow(fabs(x), 0.3)) / (3 + y + pow(x, 2) / result + pow(z, 3));
         return b;
-    }
-
-    // Приватний метод, який викликає метод calculateB
-private:
-    double b() {
-        return calculateB();
     }
 };
 
