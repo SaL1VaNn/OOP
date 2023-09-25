@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
         this->factorial = factorial;
     }
 
-    // Метод для обчислення змінної a
+
     double calculateA() {
         // Обчислення факторіала
         double result = tgamma(factorial + 1);
@@ -28,37 +28,35 @@ public:
 
     // Метод для обчислення змінної b
     double calculateB() {
-        // Обчислення факторіала
         double result = tgamma(factorial + 1);
-
-        // Обчислення b
         double b = log(10) * pow(fabs(z), 1.0 / 3.0) + (pow(y, 2) + pow(cos(x), 2) * pow(fabs(x), 0.3)) / (3 + y + pow(x, 2) / result + pow(z, 3));
         return b;
     }
 
-private:
     // Приватний метод, який викликає метод calculateB
+private:
     double b() {
         return calculateB();
     }
 };
 
 int main() {
-    // Вхідні дані
-    float x = 0.48 * 14;
+    float x_start = -1;
+    float x_end = 1;
+    float x_step = 0.2;
     float y = 0.47 * 14;
     float z = -1.32 * 14;
     int factorial = 2;
 
-    // Створення об'єкта класу Calculator 
-    Calculator calc(x, y, z, factorial);
+    cout << "Results:" << endl;
 
-    // Обчислення 'a' і 'b' за допомогою методів класу Calculator
-    double a = calc.calculateA();
-    double b = calc.calculateB();
+    for (float x = x_start; x <= x_end; x += x_step) {
+        Calculator calc(x, y, z, factorial);
+        double a = calc.calculateA();
+        double b = calc.calculateB();
 
-    cout << "a: " << a << endl;
-    cout << "b: " << b << endl;
+        cout << "x = " << x << ", a: " << a << ", b: " << b << endl;
+    }
 
     return 0;
 }
