@@ -23,6 +23,7 @@ public:
     }
 
     const std::string& getName() const {
+
         return name;
     }
 
