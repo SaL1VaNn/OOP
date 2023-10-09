@@ -23,7 +23,6 @@ public:
     }
 
     const std::string& getName() const {
-        str name = blbl
         return name;
     }
 
@@ -79,11 +78,14 @@ public:
     }
 
     Product* findProductByName(const std::string& name) {
-        auto it = std::find(products.begin(), products.end(), Product(name, "", 0));
+        auto it = std::find_if(products.begin(), products.end(), [name](const Product& product) {
+            return product.getName() == name;
+            });
         if (it != products.end()) {
             return &(*it);
         }
         return nullptr;
+
     }
 
     void showAvailableProducts() const {
