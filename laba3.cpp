@@ -1,7 +1,7 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <stdexcept>
-#include <windows.h>
+#include <Windows.h>
 
 class Square {
 public:
@@ -16,60 +16,69 @@ public:
             throw std::invalid_argument("Сторона повинна бути додатнім числом.");
         }
         side = new_side;
-        update();
     }
 
     double get_side() const {
         return side;
     }
 
-    double get_diagonal() const {
-        return diagonal;
+    double calculate_diagonal() const {
+        return side * std::sqrt(2);
     }
 
-    double get_perimetr() const {
-        return perimetr;
+    double calculate_perimeter() const {
+        return 4 * side;
     }
 
-    double get_area() const {
-        return area;
+    double calculate_area() const {
+        return side * side;
     }
 
-    void enter_data() {
+    friend std::istream& operator>>(std::istream& input, Square& square) {
         double new_side;
         std::cout << "Введіть довжину сторони квадрата: ";
-        std::cin >> new_side;
-        set_side(new_side);
+        input >> new_side;
+        square.set_side(new_side);
+        return input;
     }
 
-    void output_data() const {
-        std::cout << "Сторона: " << side << std::endl;
-        std::cout << "Діагональ: " << diagonal << std::endl;
-        std::cout << "Периметр: " << perimetr << std::endl;
-        std::cout << "Площа: " << area << std::endl;
+    friend std::ostream& operator<<(std::ostream& output, const Square& square) {
+        output << "Квадрат:" << std::endl;
+        output << "Сторона: " << square.get_side() << std::endl;
+        return output;
     }
 
 private:
     double side;
-    double diagonal;
-    double perimetr;
-    double area;
-
-    void update() {
-        diagonal = side * std::sqrt(2);
-        perimetr = 4 * side;
-        area = side * side;
-    }
 };
 
 int main() {
-    SetConsoleOutputCP(1251); 
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
     try {
         Square square;
-        square.enter_data();
-        std::cout << "Дані про квадрат:" << std::endl;
-        square.output_data();
+        std::cin >> square;
+
+        int choice;
+        std::cout << "Виберіть, що ви хочете обчислити:" << std::endl;
+        std::cout << "1. Діагональ" << std::endl;
+        std::cout << "2. Периметр" << std::endl;
+        std::cout << "3. Площу" << std::endl;
+        std::cin >> choice;
+
+        if (choice == 1) {
+            std::cout << "Діагональ: " << square.calculate_diagonal() << std::endl;
+        }
+        else if (choice == 2) {
+            std::cout << "Периметр: " << square.calculate_perimeter() << std::endl;
+        }
+        else if (choice == 3) {
+            std::cout << "Площа: " << square.calculate_area() << std::endl;
+        }
+        else {
+            std::cout << "Невірний вибір операції." << std::endl;
+        }
     }
     catch (const std::exception& e) {
         std::cerr << "Помилка: " << e.what() << std::endl;
