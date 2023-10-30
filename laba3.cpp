@@ -30,21 +30,21 @@ public:
         return 4 * side;
     }
 
+    
     double calculate_area() const {
         return side * side;
     }
 
-    friend std::istream& operator>>(std::istream& input, Square& square) {
-        double new_side;
-        std::cout << "Введіть довжину сторони квадрата: ";
-        input >> new_side;
-        square.set_side(new_side);
-        return input;
+   
+    double calculate_area(double length, double width) const {
+        return length * width;
     }
 
     friend std::ostream& operator<<(std::ostream& output, const Square& square) {
         output << "Квадрат:" << std::endl;
         output << "Сторона: " << square.get_side() << std::endl;
+        output << "Периметр: " << square.calculate_perimeter() << std::endl;
+        output << "Площа: " << square.calculate_area() << std::endl; 
         return output;
     }
 
@@ -57,14 +57,18 @@ int main() {
     SetConsoleOutputCP(1251);
 
     try {
-        Square square;
-        std::cin >> square;
+        double side;
+        std::cout << "Введіть сторону квадрата: ";
+        std::cin >> side;
+
+        Square square(side);
 
         int choice;
         std::cout << "Виберіть, що ви хочете обчислити:" << std::endl;
         std::cout << "1. Діагональ" << std::endl;
         std::cout << "2. Периметр" << std::endl;
         std::cout << "3. Площу" << std::endl;
+        std::cout << "4. Вивести інформацію про фігуру" << std::endl;
         std::cin >> choice;
 
         if (choice == 1) {
@@ -75,6 +79,9 @@ int main() {
         }
         else if (choice == 3) {
             std::cout << "Площа: " << square.calculate_area() << std::endl;
+        }
+        else if (choice == 4) {
+            std::cout << square;
         }
         else {
             std::cout << "Невірний вибір операції." << std::endl;
