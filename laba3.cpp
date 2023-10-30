@@ -35,17 +35,27 @@ public:
         return side * side;
     }
 
-   
+    
     double calculate_area(double length, double width) const {
         return length * width;
     }
 
+    
     friend std::ostream& operator<<(std::ostream& output, const Square& square) {
         output << "Квадрат:" << std::endl;
         output << "Сторона: " << square.get_side() << std::endl;
         output << "Периметр: " << square.calculate_perimeter() << std::endl;
         output << "Площа: " << square.calculate_area() << std::endl; 
         return output;
+    }
+
+   
+    friend std::istream& operator>>(std::istream& input, Square& square) {
+        double side;
+        std::cout << "Введіть сторону квадрата: ";
+        input >> side;
+        square.set_side(side); 
+        return input;
     }
 
 private:
@@ -57,11 +67,8 @@ int main() {
     SetConsoleOutputCP(1251);
 
     try {
-        double side;
-        std::cout << "Введіть сторону квадрата: ";
-        std::cin >> side;
-
-        Square square(side);
+        Square square;
+        std::cin >> square; 
 
         int choice;
         std::cout << "Виберіть, що ви хочете обчислити:" << std::endl;
