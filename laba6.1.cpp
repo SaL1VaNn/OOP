@@ -7,10 +7,10 @@ void rotateArray(T array[], int size) {
         return;
     }
 
-    // Збереження значення останнього елемента
+   
     T lastElement = array[size - 1];
 
-    // Здійснення ротації
+ 
     for (int i = size - 1; i > 0; --i) {
         array[i] = array[i - 1];
     }
